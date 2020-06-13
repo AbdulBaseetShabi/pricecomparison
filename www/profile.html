@@ -1,0 +1,69 @@
+
+<!DOCTYPE html >
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- JQuery non slim version -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom External CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/global.css">
+    <link rel="stylesheet" type="text/css" href="/static/navigationbar.css">
+    
+    <!-- Custom jquery to get navigation bar -->
+    <script> 
+        $(function(){
+          $("#navigationbar").load("/static/navigationbar.html"); 
+        });
+    </script> 
+    <title>Price Comparison</title>
+  </head>
+  <body>
+    <div id="maindiv" class="row">
+      <div style="color: white;text-align: center;" id="navigationbar" class="col-2"></div>
+      <form method="get" class="col-10">
+        <div  class="card card bg-light mb-3 border-secondary mb-3">
+          <div style="margin:0 auto;">
+            <div class="text-center" >
+              <br>
+              <h5 class="card-header bg-transparent border-secondary ">MY PROFILE</h5>
+            </div>
+            <br>
+            <ul class="list-group">
+              <label>First Name*:</label><li class="list-group-item "> Ahmad</li>
+              <br>
+              <label>Last Name*:</label><li class="list-group-item">Hussein</li>
+              <br>
+              <label>Email*:</label><li class="list-group-item">huss96@gmail.com</li>
+              <br>
+              <label>Phone Number*:</label><li class="list-group-item">+1-226-606-4563</li>
+              <br>
+            </ul>
+              <div class="text-center" style="margin-bottom:10px;">
+                <button type="button" class="btn btn-outline-dark btn-block">  <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+                EDIT PROFILE</button>
+    
+              </div>
+    
+    
+          </div>
+    
+          <br>
+    
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>
