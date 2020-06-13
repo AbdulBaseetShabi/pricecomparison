@@ -27,6 +27,14 @@ app.get('/', function (req,res) {
     sendHTML(res, 'index.html');
 });
 
+app.get('/login', function (req,res) {
+    sendHTML(res, 'login.html');
+});
+
+app.get('/profile', function (req,res) {
+    sendHTML(res, 'profile.html');
+});
+
 app.get('/saved', function (req,res) {
     sendHTML(res, 'saved.html');
 });
