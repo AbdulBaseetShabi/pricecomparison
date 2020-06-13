@@ -2,17 +2,14 @@
     background-color: black;
 }
 
-.navigation-list-item{
-    list-style-type: none;
-    text-align: start;
-    display: block  ;
-    margin-left: 10px;
+#navheader{
+    margin-top: 5px;
+    text-align: center;
+    display:block;
+    color: white;
 }
 
-.navigation-list-item:hover, .navigation-list-item i:hover, .navigation-list-item label:hover{
+a label:hover{
     cursor: pointer;
 }
 
-a, a:active, a:hover{
-    text-decoration: none;
-}
