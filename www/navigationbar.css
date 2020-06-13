@@ -1,0 +1,18 @@
+#navigationbar{
+    background-color: black;
+}
+
+.navigation-list-item{
+    list-style-type: none;
+    text-align: start;
+    display: block  ;
+    margin-left: 10px;
+}
+
+.navigation-list-item:hover, .navigation-list-item i:hover, .navigation-list-item label:hover{
+    cursor: pointer;
+}
+
+a, a:active, a:hover{
+    text-decoration: none;
+}

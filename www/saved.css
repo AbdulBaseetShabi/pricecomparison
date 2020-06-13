@@ -1,10 +1,6 @@
-html,body,#maindiv,#bodydiv{
+#bodydiv{
     width: 100%;
     height: 100%;
-}
-
-#navigationbar{
-   background-color: black;
 }
 
 #header{
@@ -14,13 +10,6 @@ html,body,#maindiv,#bodydiv{
     font-weight: bold;
     font-size: medium;
     margin-top: 10px;
-}
-
-.navigation-list-item{
-    list-style-type: none;
-    text-align: start;
-    display: block  ;
-    margin-left: 10px;
 }
 
 .info-label{
@@ -34,14 +23,6 @@ html,body,#maindiv,#bodydiv{
 
 .fa-trash-alt{
     color: red;
-}
-
-.navigation-list-item:hover, .navigation-list-item i:hover, .navigation-list-item label:hover{
-    cursor: pointer;
-}
-
-a, a:active, a:hover{
-    text-decoration: none;
 }
 
 .saved-item{
