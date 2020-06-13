@@ -7,16 +7,43 @@ html,body,#maindiv,#bodydiv{
    background-color: black;
 }
 
-li{
+#header{
+    text-align: center;
+    display: block;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: medium;
+    margin-top: 10px;
+}
+
+.navigation-list-item{
     list-style-type: none;
     text-align: start;
     display: block  ;
     margin-left: 10px;
 }
-li:hover, li i:hover, li label:hover{
+
+.info-label{
+    display: block;
+    margin: 0;
+}
+
+.fa-star{
+    color: gold;
+}
+
+.fa-trash-alt{
+    color: red;
+}
+
+.navigation-list-item:hover, .navigation-list-item i:hover, .navigation-list-item label:hover{
     cursor: pointer;
 }
 
 a, a:active, a:hover{
     text-decoration: none;
+}
+
+.saved-item{
+    margin: 5px 0;
 }
