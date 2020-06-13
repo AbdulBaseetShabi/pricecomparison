@@ -31,6 +31,10 @@ app.get('/saved', function (req,res) {
     sendHTML(res, 'saved.html');
 });
 
+app.get('/search', function (req,res){
+    sendHTML(res, 'search.html');
+})
+
 app.listen(port, host, ()=>{
     console.log(`The server is running in on ${host}:${port}`);
 })
