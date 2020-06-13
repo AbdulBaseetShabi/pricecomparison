@@ -35,6 +35,10 @@ app.get('/profile', function (req,res) {
     sendHTML(res, 'profile.html');
 });
 
+app.get('/notification', function (req,res) {
+    sendHTML(res, 'notification.html');
+});
+
 app.get('/saved', function (req,res) {
     sendHTML(res, 'saved.html');
 });
