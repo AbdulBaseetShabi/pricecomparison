@@ -31,6 +31,10 @@ app.get('/login', function (req,res) {
     sendHTML(res, 'login.html');
 });
 
+app.get('/signup', function (req,res) {
+    sendHTML(res, 'signup.html');
+});
+
 app.get('/profile', function (req,res) {
     sendHTML(res, 'profile.html');
 });
