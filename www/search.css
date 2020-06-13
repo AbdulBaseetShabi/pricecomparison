@@ -1,28 +1,17 @@
-#bodydiv{
-    width: 100%;
-    height: 100%;
-}
-
 .option{
     text-align: center;
     border: 1px solid black;
     padding: 7px 0;
     margin-top: 5px;
     width: 100%;
-    margin-left: 7px;
 }
 
 .option:hover{
     cursor: pointer;
 }
 
-#header{
-    text-align: center;
-    display: block;
-    border: 1px solid black;
-    font-weight: bold;
-    font-size: medium;
-    margin-top: 10px;
+#bodydiv{
+    margin-left: 7px;
 }
 
 .info-label{
@@ -34,12 +23,8 @@
     color: gold;
 }
 
-.fa-trash-alt{
+#search_result .fa-heart{
     color: red;
-}
-
-.fa-trash-alt:hover{
-    cursor: pointer;
 }
 
 .saved-item{
