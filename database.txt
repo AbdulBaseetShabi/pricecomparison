@@ -1,0 +1,5 @@
+[database]
+user = root
+password = Ryukudon7!
+host = localhost
+database = priceaid
