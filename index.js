@@ -27,9 +27,29 @@ app.get('/', function (req,res) {
     sendHTML(res, 'index.html');
 });
 
+app.get('/login', function (req,res) {
+    sendHTML(res, 'login.html');
+});
+
+app.get('/signup', function (req,res) {
+    sendHTML(res, 'signup.html');
+});
+
+app.get('/profile', function (req,res) {
+    sendHTML(res, 'profile.html');
+});
+
+app.get('/notification', function (req,res) {
+    sendHTML(res, 'notification.html');
+});
+
 app.get('/saved', function (req,res) {
     sendHTML(res, 'saved.html');
 });
+
+app.get('/search', function (req,res){
+    sendHTML(res, 'search.html');
+})
 
 app.listen(port, host, ()=>{
     console.log(`The server is running in on ${host}:${port}`);

@@ -1,8 +1,3 @@
-html,body,#maindiv{
-    width: 100%;
-    height: 100%;
-}
-
 #searchdiv{
     width: 75%;
     margin: auto;
@@ -19,7 +14,7 @@ html,body,#maindiv{
     border-bottom-left-radius: 50px;
     border-top-left-radius: 50px;
     height: 45px;
-    padding: 15px;
+    padding: 0 15px;
     border-right: none;
     border: 1px solid black;
 }
@@ -34,22 +29,4 @@ html,body,#maindiv{
 
 input:focus, button:focus{
     outline: none;
-}
-
-#navigationbar{
-   background-color: black;
-}
-
-li{
-    list-style-type: none;
-    text-align: start;
-    display: block  ;
-    margin-left: 10px;
-}
-li:hover, li i:hover, li label:hover{
-    cursor: pointer;
-}
-
-a, a:active, a:hover{
-    text-decoration: none;
 }

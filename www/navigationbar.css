@@ -1,0 +1,15 @@
+#navigationbar{
+    background-color: black;
+}
+
+#navheader{
+    margin-top: 5px;
+    text-align: center;
+    display:block;
+    color: white;
+}
+
+a label:hover{
+    cursor: pointer;
+}
+

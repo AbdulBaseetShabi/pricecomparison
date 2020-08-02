@@ -1,0 +1,32 @@
+.option{
+    text-align: center;
+    border: 1px solid black;
+    padding: 7px 0;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.option:hover{
+    cursor: pointer;
+}
+
+#bodydiv{
+    margin-left: 7px;
+}
+
+.info-label{
+    display: block;
+    margin: 0;
+}
+
+.fa-star{
+    color: gold;
+}
+
+#search_result .fa-heart{
+    color: red;
+}
+
+.saved-item{
+    margin: 5px 0;
+}
