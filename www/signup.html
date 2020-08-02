@@ -34,12 +34,12 @@
       <br>
 
       <div class="text-center">
-        <label style="color:Black;text-align:center; font-weight: BOLD">Sign up using Social Media</label>
+        <label style="color:Black;text-align:center; font-weight: BOLD">Sign up with</label>
         <div style="margin-bottom:5px;">
-          <button type="button" class="btn btn-outline-primary"> Sign up with Facebook</button>
+          <button type="button" class="btn btn-outline-primary"> Facebook</button>
         </div>
         <div  style="margin-bottom:5px;">
-        <button type="button" class="btn btn-outline-danger">Sign up with Gmail</button>
+        <button type="button" class="btn btn-outline-danger">Gmail</button>
 
         </div>
  </div>
