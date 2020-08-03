@@ -33,11 +33,11 @@
     </head>
     <title>Price Comparison</title>
     <body ng-app="myApp">
-        <div id="maindiv" class="row">
+        <div id="maindiv" class="row" ng-controller="SearchController">
             <div id="navigationbar" class="col-2"></div>
             <div id="bodydiv" class="col-10">
                 <div id="searchdiv">
-                    <input type="text" id="searchbar"><a href="/search"><button id="searchbutton" type="button" >Search</button></a>
+                    <input ng-model="search" type="text" id="searchbar"><a href="/search?s={{ search }}"><button id="searchbutton" type="button" >Search</button></a>
                 </div>
             </div>
         </div>
