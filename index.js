@@ -5,8 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
-var host = "localhost";
-var port = 4000;
+var port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,8 +50,8 @@ app.get('/search', function (req,res){
     sendHTML(res, 'search.html');
 })
 
-app.listen(port, host, ()=>{
-    console.log(`The server is running in on ${host}:${port}`);
+app.listen(port, ()=>{
+    console.log(`The server is running in on port ${port}`);
 })
 
 app.get('*', function(req,res){
