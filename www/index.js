@@ -120,7 +120,25 @@ app.controller("ProfileController",
                 }
             );
         }
-        
+
+        $scope.deleteUser = function () {
+            var ans = confirm("Are you sure you want to delete this user?");
+            if (ans) {
+                var query = `userID=${window.sessionStorage.getItem('userID')}`;
+                $http.get(host + "/administration/removeItemFromDB?" + query).then(
+                    function success(response){
+                        if (response.status == 200){
+                            signout();
+                        }else{
+                            alert(response.data.error);
+                        }
+                    },
+                    function error(response){
+                        alert(response);
+                    }
+                )  
+            }
+        }
         
         getUser();
     }
