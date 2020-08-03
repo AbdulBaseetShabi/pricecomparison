@@ -34,8 +34,6 @@ app.controller("LogInController",
                 }
             );
         }
-
-        function loginValidation(){}
     }
 );
 
@@ -63,6 +61,68 @@ app.controller("SignUpController",
                 }
             );
         }
+    }
+);
+
+app.controller("ProfileController", 
+    function($scope, $http){
+        $scope.firstname;
+        $scope.lastname;
+        $scope.email;
+        $scope.phonenumber;
+        $scope.password;
+        $scope.edit_mode = false;
+
+        $scope.changeMode = function () {
+            $scope.edit_mode = !$scope.edit_mode;
+        }
+
+        $scope.saveProfile = function () {
+            var query = `name=${$scope.firstname} ${$scope.lastname}&email=${$scope.email}&password=${$scope.password}&phonenumber=${$scope.phonenumber}&userID=${window.sessionStorage.getItem('userID')}`
+            $http.get(host + "/administration/updateSettings?" + query).then(function success(response){
+                if (response.status === 200 && response.data.result === 'done') { 
+                    alert('Profile Updated Successfully')
+
+                }else{
+                    alert(response.data.error);
+                }
+                getUser();
+                $scope.changeMode();
+            }, function error(response){
+                alert(response)
+                getUser();
+                $scope.changeMode();    
+            });
+        }
+
+        $scope.refreshProfile = function () {
+            getUser();
+            $scope.changeMode();
+        }
+
+        function getUser() {
+            var query = `userID=${window.sessionStorage.getItem("userID")}`
+            $http.get(host + "/administration/getUserDetail?" + query).then(
+                function success(response){
+                    if (response.status == 200){
+                        var name_array = response.data.userDetail[4].split(" ")
+                        $scope.firstname = name_array[0];
+                        $scope.lastname = name_array[1];
+                        $scope.password = response.data.userDetail[3];
+                        $scope.email = response.data.userDetail[2];
+                        $scope.phonenumber = response.data.userDetail[5];
+                    }else{
+                        alert(response.data.error);
+                    }
+                }, 
+                function error(response){
+                    alert(response);
+                }
+            );
+        }
+        
+        
+        getUser();
     }
 );
 
