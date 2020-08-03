@@ -17,7 +17,10 @@
     <!-- Custom External CSS -->
     <link rel="stylesheet" type="text/css" href="/static/global.css">
     <link rel="stylesheet" type="text/css" href="/static/navigationbar.css">
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.0/angular.min.js"></script>
+    <script src="/static/index.js" type="text/javascript"></script>
+
     <!-- Custom jquery to get navigation bar -->
     <script> 
         $(function(){
@@ -26,7 +29,7 @@
     </script> 
     <title>Price Comparison</title>
   </head>
-  <body>
+  <body ng-app="myApp">
     <div id="maindiv" class="row">
       <div id="navigationbar" class="col-2"></div>
       <form method="get" class="col-10">
