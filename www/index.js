@@ -1,3 +1,10 @@
+//navigate user back to login page if they are not logged in
+if (window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.sessionStorage.getItem("userID") === null){
+    window.location.replace(window.location.origin+'/login');
+}else if((window.location.pathname === "/login" || window.location.pathname === "/signup") && window.sessionStorage.getItem("userID") !==null){
+    window.location.replace(window.location.origin+'/');
+}
+
 var host = "http://localhost:5000";
 var app = angular.module("myApp", []);
 
@@ -28,9 +35,6 @@ app.controller("LogInController",
             );
         }
 
-        if (window.sessionStorage.getItem("userID") !== null){
-            window.location.replace(window.location.origin+'/');
-        }
         function loginValidation(){}
     }
 );
