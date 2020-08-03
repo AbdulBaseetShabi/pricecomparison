@@ -1,8 +1,8 @@
 //navigate user back to login page if they are not logged in
-if (window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.sessionStorage.getItem("userID") === null){
-    window.location.replace(window.location.origin+'/login');
-}else if((window.location.pathname === "/login" || window.location.pathname === "/signup") && window.sessionStorage.getItem("userID") !==null){
-    window.location.replace(window.location.origin+'/');
+if (window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.sessionStorage.getItem("userID") === null) {
+    window.location.replace(window.location.origin + '/login');
+} else if ((window.location.pathname === "/login" || window.location.pathname === "/signup") && window.sessionStorage.getItem("userID") !== null) {
+    window.location.replace(window.location.origin + '/');
 }
 
 var host = "http://localhost:5000";
@@ -12,20 +12,20 @@ app.controller("LogInController",
     function ($scope, $http) {
         $scope.email = "";
         $scope.password = "";
-        $scope.login = function() {
+        $scope.login = function () {
             var query = `email=${$scope.email}&password=${$scope.password}`
             $http.get(host + "/administration/logIn?" + query).then(
                 function success(response) {
-                    if (response.status == 200){
+                    if (response.status == 200) {
                         userID = response.data.userID
-                        if (userID !== 'null'){
-                            window.sessionStorage.setItem("userID",response.data.userID);
-                            window.location.replace(window.location.origin+'/');
-                        }else{
+                        if (userID !== 'null') {
+                            window.sessionStorage.setItem("userID", response.data.userID);
+                            window.location.replace(window.location.origin + '/');
+                        } else {
                             alert("Incorrect Username or Password");
                         }
 
-                    }else{
+                    } else {
                         alert(response.data.error);
                     }
                 },
@@ -49,10 +49,10 @@ app.controller("SignUpController",
             var query = `name=${$scope.firstname} ${$scope.lastname}&email=${$scope.email}&password=${$scope.password}&phonenumber=${$scope.phonenumber}`;
             $http.get(host + "/administration/addItemToDB?" + query).then(
                 function success(response) {
-                    if (response.status == 200){
+                    if (response.status == 200) {
                         alert("You have successful signed up");
-                        window.location.replace(window.location.origin+'/login');
-                    }else{
+                        window.location.replace(window.location.origin + '/login');
+                    } else {
                         alert(response.data.error);
                     }
                 },
@@ -64,8 +64,8 @@ app.controller("SignUpController",
     }
 );
 
-app.controller("ProfileController", 
-    function($scope, $http){
+app.controller("ProfileController",
+    function ($scope, $http) {
         $scope.firstname;
         $scope.lastname;
         $scope.email;
@@ -79,19 +79,19 @@ app.controller("ProfileController",
 
         $scope.saveProfile = function () {
             var query = `name=${$scope.firstname} ${$scope.lastname}&email=${$scope.email}&password=${$scope.password}&phonenumber=${$scope.phonenumber}&userID=${window.sessionStorage.getItem('userID')}`
-            $http.get(host + "/administration/updateSettings?" + query).then(function success(response){
-                if (response.status === 200 && response.data.result === 'done') { 
+            $http.get(host + "/administration/updateSettings?" + query).then(function success(response) {
+                if (response.status === 200 && response.data.result === 'done') {
                     alert('Profile Updated Successfully')
 
-                }else{
+                } else {
                     alert(response.data.error);
                 }
                 getUser();
                 $scope.changeMode();
-            }, function error(response){
+            }, function error(response) {
                 alert(response)
                 getUser();
-                $scope.changeMode();    
+                $scope.changeMode();
             });
         }
 
@@ -103,19 +103,19 @@ app.controller("ProfileController",
         function getUser() {
             var query = `userID=${window.sessionStorage.getItem("userID")}`
             $http.get(host + "/administration/getUserDetail?" + query).then(
-                function success(response){
-                    if (response.status == 200){
+                function success(response) {
+                    if (response.status == 200) {
                         var name_array = response.data.userDetail[4].split(" ")
                         $scope.firstname = name_array[0];
                         $scope.lastname = name_array[1];
                         $scope.password = response.data.userDetail[3];
                         $scope.email = response.data.userDetail[2];
                         $scope.phonenumber = response.data.userDetail[5];
-                    }else{
+                    } else {
                         alert(response.data.error);
                     }
-                }, 
-                function error(response){
+                },
+                function error(response) {
                     alert(response);
                 }
             );
@@ -126,25 +126,56 @@ app.controller("ProfileController",
             if (ans) {
                 var query = `userID=${window.sessionStorage.getItem('userID')}`;
                 $http.get(host + "/administration/removeItemFromDB?" + query).then(
-                    function success(response){
-                        if (response.status == 200){
+                    function success(response) {
+                        if (response.status == 200) {
                             signout();
-                        }else{
+                        } else {
                             alert(response.data.error);
                         }
                     },
-                    function error(response){
+                    function error(response) {
                         alert(response);
                     }
-                )  
+                )
             }
         }
-        
+
         getUser();
     }
 );
 
-function signout(){
+app.controller("SearchController",
+    function ($scope, $http) {
+        $scope.search = "";
+        $scope.result = [];
+
+        function getResults(value) {
+            var query = `search=${value.split("=")[1]}`;
+            $http.get(host + "/bestbuyproducts/products?" + query).then(
+                function success(response) {
+                    if (response.status == 200) {
+                        $scope.result = response.data.result;
+                    } else {
+                        alert(response.data.error);
+                    }
+                }, function error(response) {
+                    alert(response);
+                }
+            );
+        }
+
+        if (window.location.pathname === '/search'){
+            var search = window.location.search;
+            if(search){
+                getResults(search.slice(1));
+            }else{
+                alert("No Search Query");
+            }
+        }
+    }
+);
+
+function signout() {
     window.sessionStorage.removeItem("userID");
-    window.location.replace(window.location.origin+'/login');
+    window.location.replace(window.location.origin + '/login');
 }
