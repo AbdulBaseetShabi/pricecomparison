@@ -149,12 +149,31 @@ app.controller("SearchController",
         $scope.search = "";
         $scope.result = [];
 
+        $scope.saveItem = function (item, index) {
+            var query = `userID=${window.sessionStorage.getItem('userID')}&name=${item.name}&url=${item.url}&company_name=${item.retailer}&price=${item.salePrice}&image_url=${item.largeImage}`;
+            $http.get(host + "/savedItems/addNewItem?" + query).then(
+                function success(response) {
+                    if (response.status == 200) {
+                        $scope.result[index].saved = true;
+                    } else {
+                        alert(response.data.error);
+                    }
+                }, function error(response) {
+                    alert(response);
+                }
+            );
+        }
+
         function getResults(value) {
             var query = `search=${value.split("=")[1]}`;
             $http.get(host + "/bestbuyproducts/products?" + query).then(
                 function success(response) {
                     if (response.status == 200) {
                         $scope.result = response.data.result;
+                        for (var i = 0; i <$scope.result.length; i++) {
+                            $scope.result[i].saved = false;
+                        }
+
                     } else {
                         alert(response.data.error);
                     }
@@ -172,6 +191,43 @@ app.controller("SearchController",
                 alert("No Search Query");
             }
         }
+    }
+);
+
+app.controller("SavedItemController", 
+    function ($scope, $http){
+        $scope.saved_items = [];
+
+        function getSavedItems(){
+            var query = `userID=${window.sessionStorage.getItem('userID')}`
+            $http.get(host + "/savedItems/displayData?" + query).then(
+                function success(response){
+                    if (response.status == 200){
+                        $scope.saved_items = response.data.result;
+                    }
+                }, 
+                function error(response){
+                    alert(response);
+            });
+        }
+
+        $scope.unsaveItem = function (code) {
+            var query = `itemID=${code}`;
+            $http.get(host + "/savedItems/removeItem?" + query).then(
+                function success(response) {
+                    if (response.status == 200) {
+                        $scope.saved_items = $scope.saved_items.filter(function(item){
+                            return item.itemID !== code
+                        })
+                    } else {
+                        alert(response.data.error);
+                    }
+                }, function error(response) {
+                    alert(response);
+                }
+            );
+        }
+        getSavedItems();
     }
 );
 
