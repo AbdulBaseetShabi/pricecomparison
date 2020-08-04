@@ -37,19 +37,36 @@
             <div id="navigationbar" class="col-2"></div>
             <div id="bodydiv" class="col">
                 <div class="row">
-                    <div class="col option" >
-                        <label>Filter</label>
-                        <i class="fas fa-filter"></i>
-                    </div>
-                    <div class="col option">
-                        <label>Compare</label>
-                        <i class="fas fa-exchange-alt"></i>
+                    <div ng-click="changeMode()" class="col option">
+                        <label ng-if="!compareMode">Compare</label>
+                        <button type="button" ng-if="compareMode" class="btn btn-outline-dark btn-block btn-danger">Cancel Compare</button>
+                        <i ng-if="!compareMode" class="fas fa-exchange-alt"></i>
                     </div>
                 </div>
                 <div id="search_result">
                     <div id="items-body">
-                        <li class="row saved-item" ng-repeat="item in result">
-                           <img class="col-3" id="savedimg" src="{{ item.largeImage }}">
+                        <li ng-if="!compareMode" class="row saved-item" ng-repeat="item in result">
+                            <img class="col-3" id="savedimg" height="180" width="180" src="{{ item.largeImage }}">
+                            <div id="info" class="col-8 d-flex align-items-center">
+                                <div>
+                                     <label class="info-label">Product Name: <label style="margin: 0;">{{ item.name }}</label></label>
+                                     <label class="info-label">Product Link: <a href="item.url">{{ item.url }}</a></label>
+                                     <label class="info-label">Company: <label style="margin: 0;">{{ item.retailer }}</label></label>
+                                     <label class="info-label">Price: <label style="margin: 0;">{{ item.salePrice }}</label></label>
+                                </div>
+                             </div>
+                            <div class="col-1 d-flex justify-content-center">
+                                <div>
+                                     <input ng-click="modifycompareList($index)" ng-model="item.checked" type="checkbox">
+                                     <br>
+                                     <i ng-if="item.saved" class="fas fa-heart"></i>
+                                     <i ng-if="!item.saved" ng-click="saveItem(item, $index)" style="color:antiquewhite;" class="fas fa-heart"></i>
+                                </div>
+                            </div>
+                            <hr style="height: 30px;width: 100%;">
+                        </li>
+                        <li ng-if="compareMode" class="row saved-item" ng-repeat="item in compareList">
+                           <img class="col-3" id="savedimg" height="180" width="180" src="{{ item.largeImage }}">
                            <div id="info" class="col-8 d-flex align-items-center">
                                <div>
                                     <label class="info-label">Product Name: <label style="margin: 0;">{{ item.name }}</label></label>
@@ -60,12 +77,13 @@
                             </div>
                            <div class="col-1 d-flex justify-content-center">
                                <div>
-                                    <input type="checkbox">
+                                    <input ng-click="modifycompareList($index)" ng-model="item.checked" type="checkbox">
                                     <br>
                                     <i ng-if="item.saved" class="fas fa-heart"></i>
                                     <i ng-if="!item.saved" ng-click="saveItem(item, $index)" style="color:antiquewhite;" class="fas fa-heart"></i>
                                </div>
                            </div>
+                           <hr style="height: 30px;width: 100%;">
                         </li>
                     </div>
                 </div>
