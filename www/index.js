@@ -149,6 +149,8 @@ app.controller("SearchController",
     function ($scope, $http) {
         $scope.search = "";
         $scope.result = [];
+        $scope.compareList = [];
+        $scope.compareMode = false;
 
         $scope.saveItem = function (item, index) {
             var query = `userID=${window.sessionStorage.getItem('userID')}&name=${item.name}&url=${item.url}&company_name=${item.retailer}&price=${item.salePrice}&image_url=${item.largeImage}`;
@@ -165,6 +167,34 @@ app.controller("SearchController",
             );
         }
 
+        $scope.changeMode = function (){
+            $scope.compareMode = !$scope.compareMode;
+            // $scope.result = $scope.compareList;
+        }
+
+        $scope.modifycompareList = function (index) {
+            if (!$scope.result[index].checked) {
+                $scope.result[index].checked = true;
+                $scope.compareList.push($scope.result[index]);
+            } else {
+                $scope.result[index].checked = false;
+                $scope.compareList = $scope.compareList.filter(function (item) {
+                    return item !== $scope.result[index];
+                });
+            }
+        }
+
+        $scope.saveSearch = function () {
+            var query = `userID=${window.sessionStorage.getItem('userID')}&searchDate=${new Date().toISOString()}&itemName=${$scope.search}`;
+            $http.get(host + "/customers/addHistory?" + query).then(
+                function success(response) {
+                    if (response.status != 200) alert(response.data.error);
+                }, function error(response) {
+                    alert(response);
+                }
+            );
+        }
+
         function getResults(value) {
             var query = `search=${value.split("=")[1]}`;
             $http.get(host + "/bestbuyproducts/products?" + query).then(
@@ -173,6 +203,8 @@ app.controller("SearchController",
                         $scope.result = response.data.result;
                         for (var i = 0; i < $scope.result.length; i++) {
                             $scope.result[i].saved = false;
+                            $scope.result[i].checked = false;
+                            $scope.result[i].largeImage = !$scope.result[i].largeImage ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png' : $scope.result[i].largeImage;
                         }
 
                     } else {
@@ -247,6 +279,34 @@ app.controller("SavedItemController",
             }
         }
         getSavedItems();
+    }
+);
+
+app.controller("HistoryController",
+    function ($scope, $http) {
+        $scope.history = [];
+        $scope.any_history = false;
+
+        function getHistory() {
+            var query = `userID=${window.sessionStorage.getItem('userID')}`;
+            $http.get(host + "/customers/history?" + query).then(
+                function success(response) {
+                    if (response.status == 200) {
+                        $scope.history = response.data.history;
+                        $scope.any_history = $scope.history.length > 0;
+                        for (var i = 0; i < $scope.history.length; i++) {
+                            $scope.history[i].searchedDate = new Date($scope.history[i].searchedDate).toLocaleDateString() + " " + new Date($scope.history[i].searchedDate).toLocaleTimeString();
+                        }
+                    } else {
+                        alert(response.data.error);
+                    }
+                }, function error(response) {
+                    alert(response);
+                }
+            );
+        }
+
+        getHistory();
     }
 );
 
