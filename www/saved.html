@@ -36,12 +36,6 @@
         <div id="maindiv" class="row">
             <div id="navigationbar" class="col-2"></div>
             <div id="bodydiv" class="col-10">
-                <div class="row">
-                    <div class="col option" >
-                        <label>Filter</label>
-                        <i class="fas fa-filter"></i>
-                    </div>
-                </div>
                 <button style="margin-top: 5px;" type="button" ng-click="clearCart()" class="btn btn-outline-dark btn-block btn-danger">Clear Cart</button>
                 <div id="items-body">
                     <li class="row saved-item" ng-repeat="item in saved_items">
@@ -57,6 +51,7 @@
                         <div class="col-1 d-flex align-items-center justify-content-center">
                             <i ng-click="unsaveItem(item.itemID)" class="fas fa-trash-alt"></i>
                         </div>
+                        <hr style="height: 30px;width: 100%;">
                     </li>
                 </div>
             </div>
