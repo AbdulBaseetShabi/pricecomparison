@@ -188,7 +188,11 @@ app.controller("SearchController",
             var query = `userID=${window.sessionStorage.getItem('userID')}&searchDate=${new Date().toISOString()}&itemName=${$scope.search}`;
             $http.get(host + "/customers/addHistory?" + query).then(
                 function success(response) {
-                    if (response.status != 200) alert(response.data.error);
+                    if (response.status == 200){
+                        window.location.assign(window.location.origin + `/search?s=${$scope.search}`);
+                    }else{
+                        alert(response.data.error);
+                    }
                 }, function error(response) {
                     alert(response);
                 }
