@@ -79,20 +79,21 @@ app.controller("ProfileController",
 
         $scope.saveProfile = function () {
             var query = `name=${$scope.firstname} ${$scope.lastname}&email=${$scope.email}&password=${$scope.password}&phonenumber=${$scope.phonenumber}&userID=${window.sessionStorage.getItem('userID')}`
-            $http.get(host + "/administration/updateSettings?" + query).then(function success(response) {
-                if (response.status === 200 && response.data.result === 'done') {
-                    alert('Profile Updated Successfully')
+            $http.get(host + "/administration/updateSettings?" + query).then(
+                function success(response) {
+                    if (response.status === 200 && response.data.result === 'done') {
+                        alert('Profile Updated Successfully')
 
-                } else {
-                    alert(response.data.error);
-                }
-                getUser();
-                $scope.changeMode();
-            }, function error(response) {
-                alert(response)
-                getUser();
-                $scope.changeMode();
-            });
+                    } else {
+                        alert(response.data.error);
+                    }
+                    getUser();
+                    $scope.changeMode();
+                }, function error(response) {
+                    alert(response)
+                    getUser();
+                    $scope.changeMode();
+                });
         }
 
         $scope.refreshProfile = function () {
@@ -170,7 +171,7 @@ app.controller("SearchController",
                 function success(response) {
                     if (response.status == 200) {
                         $scope.result = response.data.result;
-                        for (var i = 0; i <$scope.result.length; i++) {
+                        for (var i = 0; i < $scope.result.length; i++) {
                             $scope.result[i].saved = false;
                         }
 
@@ -183,32 +184,32 @@ app.controller("SearchController",
             );
         }
 
-        if (window.location.pathname === '/search'){
+        if (window.location.pathname === '/search') {
             var search = window.location.search;
-            if(search){
+            if (search) {
                 getResults(search.slice(1));
-            }else{
+            } else {
                 alert("No Search Query");
             }
         }
     }
 );
 
-app.controller("SavedItemController", 
-    function ($scope, $http){
+app.controller("SavedItemController",
+    function ($scope, $http) {
         $scope.saved_items = [];
 
-        function getSavedItems(){
+        function getSavedItems() {
             var query = `userID=${window.sessionStorage.getItem('userID')}`
             $http.get(host + "/savedItems/displayData?" + query).then(
-                function success(response){
-                    if (response.status == 200){
+                function success(response) {
+                    if (response.status == 200) {
                         $scope.saved_items = response.data.result;
                     }
-                }, 
-                function error(response){
+                },
+                function error(response) {
                     alert(response);
-            });
+                });
         }
 
         $scope.unsaveItem = function (code) {
@@ -216,7 +217,7 @@ app.controller("SavedItemController",
             $http.get(host + "/savedItems/removeItem?" + query).then(
                 function success(response) {
                     if (response.status == 200) {
-                        $scope.saved_items = $scope.saved_items.filter(function(item){
+                        $scope.saved_items = $scope.saved_items.filter(function (item) {
                             return item.itemID !== code
                         })
                     } else {
@@ -226,6 +227,24 @@ app.controller("SavedItemController",
                     alert(response);
                 }
             );
+        }
+
+        $scope.clearCart = function () {
+            var ans = confirm("Are you sure you want to delete all saved items?");
+            if (ans) {
+                var query = `userID=${window.sessionStorage.getItem('userID')}`;
+                $http.get(host + "/savedItems/cleanCart?" + query).then(
+                    function success(response) {
+                        if (response.status == 200) {
+                            $scope.saved_items = [];
+                        } else {
+                            alert(response.data.error);
+                        }
+                    }, function error(response) {
+                        alert(response);
+                    }
+                );
+            }
         }
         getSavedItems();
     }

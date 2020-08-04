@@ -42,6 +42,7 @@
                         <i class="fas fa-filter"></i>
                     </div>
                 </div>
+                <button style="margin-top: 5px;" type="button" ng-click="clearCart()" class="btn btn-outline-dark btn-block btn-danger">Clear Cart</button>
                 <div id="items-body">
                     <li class="row saved-item" ng-repeat="item in saved_items">
                        <img class="col-3" id="savedimg" src="{{ item.image_url }}">
