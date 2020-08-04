@@ -49,12 +49,12 @@
                 <div id="search_result">
                     <div id="items-body">
                         <li class="row saved-item" ng-repeat="item in result">
-                           <img class="col-3" id="savedimg" src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg">
+                           <img class="col-3" id="savedimg" src="{{ item.largeImage }}">
                            <div id="info" class="col-8 d-flex align-items-center">
                                <div>
                                     <label class="info-label">Product Name: <label style="margin: 0;">{{ item.name }}</label></label>
-                                    <label class="info-label">Product Link: <a href="http://google.ca">google.ca</a></label>
-                                    <label class="info-label">Company: <label style="margin: 0;">The Zoo</label></label>
+                                    <label class="info-label">Product Link: <a href="item.url">{{ item.url }}</a></label>
+                                    <label class="info-label">Company: <label style="margin: 0;">{{ item.retailer }}</label></label>
                                     <label class="info-label">Price: <label style="margin: 0;">{{ item.salePrice }}</label></label>
                                </div>
                             </div>
@@ -62,7 +62,8 @@
                                <div>
                                     <input type="checkbox">
                                     <br>
-                                    <i class="fas fa-heart"></i>
+                                    <i ng-if="item.saved" class="fas fa-heart"></i>
+                                    <i ng-if="!item.saved" ng-click="saveItem(item, $index)" style="color:antiquewhite;" class="fas fa-heart"></i>
                                </div>
                            </div>
                         </li>
